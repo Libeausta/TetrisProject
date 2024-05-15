@@ -4,7 +4,6 @@
 #include <DFMiniMp3.h>
 
 #define LED_DIN 6
-#define JOYSTICK_PIN 2
 #define MAX7219_DIN 3
 #define MAX7219_CS 4
 #define MAX7219_CLK 5
@@ -403,10 +402,10 @@ void remove_row() {
 void pos_side() {
   int dx = map(analogRead(JOYSTICK_X), 0, 1023, 512, -512);
   int new_px = 0;
-  if(dx>JOYSTICK_CHNG_LVL) {
+  if(dx<-JOYSTICK_CHNG_LVL) {
     new_px=-1;
   }
-  if(dx<-JOYSTICK_CHNG_LVL) {
+  if(dx>JOYSTICK_CHNG_LVL) {
     new_px=1;
   }
   if(new_px!=old_px && pos_fit(figure_x+new_px, figure_y, figure_rotation)==1) {
